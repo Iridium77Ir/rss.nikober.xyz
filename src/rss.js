@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const app = express()
+
 const expressLayouts = require('express-ejs-layouts')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
@@ -24,30 +25,10 @@ db.once('open', () => console.log('Connected to Mongoose'))
 
 //RSS stuff
 
-import { Feed } from "feed";
+// Require nm module "rss" (node-rss)
+var rss = require('rss');
 
-const feed = new Feed({
-  title: "Personal Feed",
-  description: "This is my personal feed!",
-  id: "http://rss.nikober.xyz/personal/",
-  link: "http://rss.nikober.xyz/",
-  language: "en",
-  copyright: "All rights reserved 2013, John Doe",
-  updated: new Date(2013, 6, 14), // optional, default = today
-  generator: "awesome", // optional, default = 'Feed for Node.js'
-  author: {
-    name: "Niklas Oberhuber"
-  }
-});
+const personalRouter = require('./routes/personal');
+router.use('/feed/personal', personalRouter)
 
-posts.forEach(post => {
-    feed.addItem({
-      title: "test",
-      id: "test",
-      link: "test",
-      description: "test",
-      content: "test"
-    });
-});
-
-app.listen(process.env.PORT)
+app.listen(process.env.PORT);
