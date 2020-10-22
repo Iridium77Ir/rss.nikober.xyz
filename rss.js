@@ -23,12 +23,24 @@ const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
 
-//RSS stuff
+app.get('/', async (req, res) => {
+    res.render('index.ejs');
+})
 
-// Require nm module "rss" (node-rss)
-var rss = require('rss');
-
-const personalRouter = require('./routes/personal');
-router.use('/feed/personal', personalRouter)
+//routers
+const personalRouter = require('./routes/rss');
+app.use('/feed/', personalRouter)
+const newrssRouter = require('./routes/newrss');
+app.use('/new', newrssRouter)
+const loginRouter = require('./routes/login');
+app.use('/login', loginRouter)
 
 app.listen(process.env.PORT);
+
+function checkCookie(req) {
+    if(req.signedCookies['loggedin'] == "true") {
+        return true;
+    } else {
+        return false;
+    }
+}
