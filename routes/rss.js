@@ -14,7 +14,7 @@ router.get('/:feedid', async (req, res) => {
         author: 'Niklas Oberhuber'
     });
 
-    var rsspost = await Post.find({category: req.params.num}).limit(10);
+    var rsspost = await Post.find({category: req.params.feedid}).limit(10);
     
     rsspost.forEach(post => {
         feed.item({

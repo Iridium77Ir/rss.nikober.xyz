@@ -20,11 +20,11 @@ router.post('/', async (req, res) => {
         subject: req.body.subject,
         summary: req.body.summary,
         content: req.body.content,
-        catergory: req.body.catergory
+        category: req.body.category
     })
     try {
         const newRss = await newrss.save();
-        res.redirect('/')
+        res.redirect('/new')
     } catch (err) {
         console.log(err)
         res.send(err)
