@@ -4,7 +4,7 @@ var rss = require('rss');
 const Post = require('../models/rss')
 
 // Express get listener event for url to RSS feed
-router.get('/', async (req, res) => {
+router.get('/:feedid', async (req, res) => {
     // Create rss prototype object and set some base values
     var feed = new rss({
         title: 'Niklas Oberhuber',
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
         author: 'Niklas Oberhuber'
     });
 
-    var rsspost = await Post.find().limit(10);
+    var rsspost = await Post.find({category: req.params.num}).limit(10);
     
     rsspost.forEach(post => {
         feed.item({
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
             custom_elements: [
               {'content:encoded' : post.content}
             ]
-        });  
+        });
     });
     res.type('rss');
     res.send(feed.xml());

@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
     var newrss = new Post({
         subject: req.body.subject,
         summary: req.body.summary,
-        content: req.body.content
+        content: req.body.content,
+        catergory: req.body.catergory
     })
     try {
         const newRss = await newrss.save();

@@ -1,3 +1,4 @@
+<h3>New Rss Post: </h3>
 <form method="POST" action="/new/">
     <div class="form">
         <label for="subject">Title</label>
@@ -6,6 +7,12 @@
         <input type="text" name="summary">
         <label for="content">Content</label>
         <input type="text" name="content">
+        <label for="category">Choose a category:</label>
+        <select name="category">
+            <option value="personal">personal</option>
+            <option value="news">news</option>
+            <option value="tech">tech</option>
+        </select>
         <button type="submit">Send</button>
     </div>
 </form>
