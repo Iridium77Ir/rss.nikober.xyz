@@ -30,3 +30,6 @@ h2 {
 .yellow-font {
     color: #ebe838;
 }
+ul {
+    list-style-type: none;
+}
